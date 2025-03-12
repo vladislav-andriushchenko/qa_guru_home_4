@@ -3,8 +3,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class HerokuappTests {
     @BeforeAll
@@ -23,5 +22,17 @@ public class HerokuappTests {
         $("#column-a").dragAndDropTo("#column-b");
         $("#column-a").shouldHave(text("B"));
         $("#column-b").shouldHave(text("A"));
+    }
+
+    @Test
+    void checkDragAndDropActionTest() {
+        String a = "#column-a";
+        String b = "#column-b";
+        open("/drag_and_drop");
+        $(a).shouldHave(text("A"));
+        $(b).shouldHave(text("B"));
+        actions().moveToElement($(a)).clickAndHold().moveToElement($(b)).release().perform();
+        $(a).shouldHave(text("B"));
+        $(b).shouldHave(text("A"));
     }
 }
