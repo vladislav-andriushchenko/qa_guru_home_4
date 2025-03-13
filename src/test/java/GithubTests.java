@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class GithubTests {
     @BeforeAll
@@ -18,8 +17,9 @@ public class GithubTests {
     @Test
     void checkTitleTest() {
         open("https://github.com/");
-        $("div.HeaderMenu").$(byText("Solutions")).hover();
-        $(byText("Enterprises")).click();
+        $(".HeaderMenu").$(byText("Solutions")).hover();
+        $$(".HeaderMenu-dropdown-link").findBy(text("Enterprises")).click();
+//        $(byText("Enterprises")).click();
         $("#hero-section-brand-heading").shouldHave(text("The AI-powered\ndeveloper platform"));
     }
 }
