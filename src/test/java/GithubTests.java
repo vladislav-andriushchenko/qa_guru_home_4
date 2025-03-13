@@ -12,13 +12,13 @@ public class GithubTests {
     static void setUp() {
         Configuration.browser = "chrome";
         Configuration.browserSize = "1920x1080";
-        Configuration.holdBrowserOpen = false;
+        Configuration.holdBrowserOpen = true;
     }
 
     @Test
     void checkTitleTest() {
         open("https://github.com/");
-        $(byText("Solutions")).hover();
+        $("div.HeaderMenu").$(byText("Solutions")).hover();
         $(byText("Enterprises")).click();
         $("#hero-section-brand-heading").shouldHave(text("The AI-powered\ndeveloper platform"));
     }
